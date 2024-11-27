@@ -15,7 +15,7 @@
 
         <Image Source="Resources\path.png" 
                HorizontalAlignment="Left"/>
-        <TextBlock Text="Header" 
+        <TextBlock Text="{Binding ElementName=MainFrame, Path=Content.Title}" 
                    FontSize="30" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center"></TextBlock>

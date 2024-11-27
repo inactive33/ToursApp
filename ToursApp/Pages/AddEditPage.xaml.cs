@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToursApp.Entities;
 
 namespace ToursApp.Pages
 {
@@ -23,6 +25,13 @@ namespace ToursApp.Pages
         public AddEditPage()
         {
             InitializeComponent();
+            ComboCountries.SelectedIndex = 0;
+            ComboCountries.ItemsSource = ToursAppEntities.GetContext().Countries.ToList();
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
