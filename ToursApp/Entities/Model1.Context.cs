@@ -20,15 +20,12 @@ namespace ToursApp.Entities
             : base("name=ToursAppEntities")
         {
         }
-
+        
         public static ToursAppEntities GetContext() 
         { 
-            if (_context == null) 
-                _context = new ToursAppEntities();
-
+            if (_context == null) _context = new ToursAppEntities();
             return _context;
         }
-    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ToursAppModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище ToursAppModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="Code" />
@@ -16,7 +16,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="CountOfStars" Type="int" Nullable="false" />
           <Property Name="CountryCode" Type="nchar" MaxLength="2" Nullable="false" />
@@ -208,31 +208,59 @@
             <End Role="TypeOfTour" EntitySet="TypeOfTour" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ToursAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ToursAppEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Countries" EntityType="ToursAppModel.Country" />
+          <EntitySet Name="Hotels" EntityType="ToursAppModel.Hotel" />
+          <EntitySet Name="HotelComments" EntityType="ToursAppModel.HotelComment" />
+          <EntitySet Name="HotelImages" EntityType="ToursAppModel.HotelImage" />
+          <EntitySet Name="sysdiagrams" EntityType="ToursAppModel.sysdiagram" />
+          <EntitySet Name="Tours" EntityType="ToursAppModel.Tour" />
+          <EntitySet Name="Types" EntityType="ToursAppModel.Type" />
+          <AssociationSet Name="FK_Hotel_Country" Association="ToursAppModel.FK_Hotel_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Hotel" EntitySet="Hotels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HotelComment_Hotel" Association="ToursAppModel.FK_HotelComment_Hotel">
+            <End Role="Hotel" EntitySet="Hotels" />
+            <End Role="HotelComment" EntitySet="HotelComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HotelImage_Hotel" Association="ToursAppModel.FK_HotelImage_Hotel">
+            <End Role="Hotel" EntitySet="Hotels" />
+            <End Role="HotelImage" EntitySet="HotelImages" />
+          </AssociationSet>
+          <AssociationSet Name="HotelOfTour" Association="ToursAppModel.HotelOfTour">
+            <End Role="Hotel" EntitySet="Hotels" />
+            <End Role="Tour" EntitySet="Tours" />
+          </AssociationSet>
+          <AssociationSet Name="TypeOfTour" Association="ToursAppModel.TypeOfTour">
+            <End Role="Tour" EntitySet="Tours" />
+            <End Role="Type" EntitySet="Types" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="Code" />
           </Key>
-          <Property Name="Code" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Hotels" Relationship="Self.FK_Hotel_Country" FromRole="Country" ToRole="Hotel" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Hotels" Relationship="ToursAppModel.FK_Hotel_Country" FromRole="Country" ToRole="Hotel" />
         </EntityType>
         <EntityType Name="Hotel">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CountOfStars" Type="Int32" Nullable="false" />
-          <Property Name="CountryCode" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Country" Relationship="Self.FK_Hotel_Country" FromRole="Hotel" ToRole="Country" />
-          <NavigationProperty Name="HotelComment" Relationship="Self.FK_HotelComment_Hotel" FromRole="Hotel" ToRole="HotelComment" />
-          <NavigationProperty Name="HotelImages" Relationship="Self.FK_HotelImage_Hotel" FromRole="Hotel" ToRole="HotelImage" />
-          <NavigationProperty Name="Tours" Relationship="Self.HotelOfTour" FromRole="Hotel" ToRole="Tour" />
+          <Property Name="CountryCode" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Country" Relationship="ToursAppModel.FK_Hotel_Country" FromRole="Hotel" ToRole="Country" />
+          <NavigationProperty Name="HotelComment" Relationship="ToursAppModel.FK_HotelComment_Hotel" FromRole="Hotel" ToRole="HotelComment" />
+          <NavigationProperty Name="HotelImages" Relationship="ToursAppModel.FK_HotelImage_Hotel" FromRole="Hotel" ToRole="HotelImage" />
+          <NavigationProperty Name="Tours" Relationship="ToursAppModel.HotelOfTour" FromRole="Hotel" ToRole="Tour" />
         </EntityType>
         <EntityType Name="HotelComment">
           <Key>
@@ -240,10 +268,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Hotel_id" Type="Int32" Nullable="false" />
-          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Author" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Hotel" Relationship="Self.FK_HotelComment_Hotel" FromRole="HotelComment" ToRole="Hotel" />
+          <NavigationProperty Name="Hotel" Relationship="ToursAppModel.FK_HotelComment_Hotel" FromRole="HotelComment" ToRole="Hotel" />
         </EntityType>
         <EntityType Name="HotelImage">
           <Key>
@@ -251,14 +279,14 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Hotel_id" Type="Int32" Nullable="false" />
-          <Property Name="ImageSource" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <NavigationProperty Name="Hotel" Relationship="Self.FK_HotelImage_Hotel" FromRole="HotelImage" ToRole="Hotel" />
+          <Property Name="ImageSource" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Hotel" Relationship="ToursAppModel.FK_HotelImage_Hotel" FromRole="HotelImage" ToRole="Hotel" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -270,26 +298,26 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="TicketCount" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="ImagePreview" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="isActual" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Hotels" Relationship="Self.HotelOfTour" FromRole="Tour" ToRole="Hotel" />
-          <NavigationProperty Name="Types" Relationship="Self.TypeOfTour" FromRole="Tour" ToRole="Type" />
+          <NavigationProperty Name="Hotels" Relationship="ToursAppModel.HotelOfTour" FromRole="Tour" ToRole="Hotel" />
+          <NavigationProperty Name="Types" Relationship="ToursAppModel.TypeOfTour" FromRole="Tour" ToRole="Type" />
         </EntityType>
         <EntityType Name="Type">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Tours" Relationship="Self.TypeOfTour" FromRole="Type" ToRole="Tour" />
+          <NavigationProperty Name="Tours" Relationship="ToursAppModel.TypeOfTour" FromRole="Type" ToRole="Tour" />
         </EntityType>
         <Association Name="FK_Hotel_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="Hotel" Type="Self.Hotel" Multiplicity="*" />
+          <End Type="ToursAppModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="ToursAppModel.Hotel" Role="Hotel" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Country">
               <PropertyRef Name="Code" />
@@ -300,8 +328,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HotelComment_Hotel">
-          <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
-          <End Role="HotelComment" Type="Self.HotelComment" Multiplicity="0..1" />
+          <End Type="ToursAppModel.Hotel" Role="Hotel" Multiplicity="1" />
+          <End Type="ToursAppModel.HotelComment" Role="HotelComment" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Hotel">
               <PropertyRef Name="Id" />
@@ -312,8 +340,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HotelImage_Hotel">
-          <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
-          <End Role="HotelImage" Type="Self.HotelImage" Multiplicity="*" />
+          <End Type="ToursAppModel.Hotel" Role="Hotel" Multiplicity="1" />
+          <End Type="ToursAppModel.HotelImage" Role="HotelImage" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Hotel">
               <PropertyRef Name="Id" />
@@ -324,42 +352,13 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="HotelOfTour">
-          <End Role="Hotel" Type="Self.Hotel" Multiplicity="*" />
-          <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
+          <End Type="ToursAppModel.Hotel" Role="Hotel" Multiplicity="*" />
+          <End Type="ToursAppModel.Tour" Role="Tour" Multiplicity="*" />
         </Association>
         <Association Name="TypeOfTour">
-          <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
-          <End Role="Type" Type="Self.Type" Multiplicity="*" />
+          <End Type="ToursAppModel.Tour" Role="Tour" Multiplicity="*" />
+          <End Type="ToursAppModel.Type" Role="Type" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="ToursAppEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Countries" EntityType="Self.Country" />
-          <EntitySet Name="Hotels" EntityType="Self.Hotel" />
-          <EntitySet Name="HotelComments" EntityType="Self.HotelComment" />
-          <EntitySet Name="HotelImages" EntityType="Self.HotelImage" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Tours" EntityType="Self.Tour" />
-          <EntitySet Name="Types" EntityType="Self.Type" />
-          <AssociationSet Name="FK_Hotel_Country" Association="Self.FK_Hotel_Country">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="Hotel" EntitySet="Hotels" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HotelComment_Hotel" Association="Self.FK_HotelComment_Hotel">
-            <End Role="Hotel" EntitySet="Hotels" />
-            <End Role="HotelComment" EntitySet="HotelComments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HotelImage_Hotel" Association="Self.FK_HotelImage_Hotel">
-            <End Role="Hotel" EntitySet="Hotels" />
-            <End Role="HotelImage" EntitySet="HotelImages" />
-          </AssociationSet>
-          <AssociationSet Name="HotelOfTour" Association="Self.HotelOfTour">
-            <End Role="Hotel" EntitySet="Hotels" />
-            <End Role="Tour" EntitySet="Tours" />
-          </AssociationSet>
-          <AssociationSet Name="TypeOfTour" Association="Self.TypeOfTour">
-            <End Role="Tour" EntitySet="Tours" />
-            <End Role="Type" EntitySet="Types" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -369,88 +368,88 @@
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="ToursAppModel.Country">
               <MappingFragment StoreEntitySet="Country">
-                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Hotels">
             <EntityTypeMapping TypeName="ToursAppModel.Hotel">
               <MappingFragment StoreEntitySet="Hotel">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CountOfStars" ColumnName="CountOfStars" />
                 <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="CountOfStars" ColumnName="CountOfStars" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HotelComments">
             <EntityTypeMapping TypeName="ToursAppModel.HotelComment">
               <MappingFragment StoreEntitySet="HotelComment">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Hotel_id" ColumnName="Hotel_id" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="Author" ColumnName="Author" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Hotel_id" ColumnName="Hotel_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HotelImages">
             <EntityTypeMapping TypeName="ToursAppModel.HotelImage">
               <MappingFragment StoreEntitySet="HotelImage">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Hotel_id" ColumnName="Hotel_id" />
                 <ScalarProperty Name="ImageSource" ColumnName="ImageSource" />
+                <ScalarProperty Name="Hotel_id" ColumnName="Hotel_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="ToursAppModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tours">
             <EntityTypeMapping TypeName="ToursAppModel.Tour">
               <MappingFragment StoreEntitySet="Tour">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TicketCount" ColumnName="TicketCount" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ImagePreview" ColumnName="ImagePreview" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="isActual" ColumnName="isActual" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ImagePreview" ColumnName="ImagePreview" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TicketCount" ColumnName="TicketCount" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Types">
             <EntityTypeMapping TypeName="ToursAppModel.Type">
               <MappingFragment StoreEntitySet="Type">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="HotelOfTour" TypeName="ToursAppModel.HotelOfTour" StoreEntitySet="HotelOfTour">
+            <EndProperty Name="Tour">
+              <ScalarProperty Name="Id" ColumnName="Tour_id" />
+            </EndProperty>
             <EndProperty Name="Hotel">
               <ScalarProperty Name="Id" ColumnName="Hotel_id" />
             </EndProperty>
-            <EndProperty Name="Tour">
-              <ScalarProperty Name="Id" ColumnName="Tour_id" />
-            </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="TypeOfTour" TypeName="ToursAppModel.TypeOfTour" StoreEntitySet="TypeOfTour">
-            <EndProperty Name="Tour">
-              <ScalarProperty Name="Id" ColumnName="Tour_id" />
-            </EndProperty>
             <EndProperty Name="Type">
               <ScalarProperty Name="Id" ColumnName="Type_id" />
+            </EndProperty>
+            <EndProperty Name="Tour">
+              <ScalarProperty Name="Id" ColumnName="Tour_id" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
