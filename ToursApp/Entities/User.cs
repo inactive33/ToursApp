@@ -12,14 +12,17 @@ namespace ToursApp.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class HotelComment
+    public partial class User
     {
-        public int Id { get; set; }
-        public int Hotel_id { get; set; }
-        public string Text { get; set; }
-        public string Author { get; set; }
-        public System.DateTime CreationDate { get; set; }
+        public int ID { get; set; }
+        public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public string Login { get; set; }
+        public bool IsDeleted { get; set; }
     
-        public virtual Hotel Hotel { get; set; }
+        public virtual Executor Executor { get; set; }
+        public virtual Manager Manager { get; set; }
     }
 }

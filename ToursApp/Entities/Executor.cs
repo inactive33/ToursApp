@@ -12,25 +12,21 @@ namespace ToursApp.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Hotel
+    public partial class Executor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Hotel()
+        public Executor()
         {
-            this.HotelImages = new HashSet<HotelImage>();
-            this.Tours = new HashSet<Tour>();
+            this.Tasks = new HashSet<Task>();
         }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int CountOfStars { get; set; }
-        public string CountryCode { get; set; }
+        public int ID { get; set; }
+        public int ManagerID { get; set; }
+        public string Grade { get; set; }
     
-        public virtual Country Country { get; set; }
-        public virtual HotelComment HotelComment { get; set; }
+        public virtual Manager Manager { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HotelImage> HotelImages { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tour> Tours { get; set; }
+        public virtual ICollection<Task> Tasks { get; set; }
     }
 }

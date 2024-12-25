@@ -9,16 +9,16 @@ namespace ToursApp.Pages
     /// <summary>
     /// Логика взаимодействия для HotelsPage.xaml
     /// </summary>
-    public partial class HotelsPage : Page
+    public partial class UsersPage : Page
     {
-        public HotelsPage()
+        public UsersPage()
         {
             InitializeComponent();
-            DGridHotels.ItemsSource = ToursAppEntities.GetContext().Hotels.ToList();
+            DGridUsers.ItemsSource = IS24_USER10Entities.GetContext().Users.ToList();
         }
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddEditPage((sender as Button).DataContext as Hotel));
+            Manager.MainFrame.Navigate(new AddEditPage((sender as Button).DataContext as User));
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -28,14 +28,14 @@ namespace ToursApp.Pages
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            var hotelsForRemoving = DGridHotels.SelectedItems.Cast<Hotel>().ToList();
+            var hotelsForRemoving = DGridUsers.SelectedItems.Cast<User>().ToList();
 
             if (MessageBox.Show($"Вы точно хотите удалить следующие {hotelsForRemoving.Count()} элементов?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             { 
                 try 
-                { 
-                    ToursAppEntities.GetContext().Hotels.RemoveRange(hotelsForRemoving);
-                    ToursAppEntities.GetContext().SaveChanges();
+                {
+                    IS24_USER10Entities.GetContext().Users.RemoveRange(hotelsForRemoving);
+                  //  IS24_USER10Entities.GetContext().SaveChanges();
 
                 } catch (Exception ex) { MessageBox.Show(ex.ToString()); }
             }
@@ -45,8 +45,8 @@ namespace ToursApp.Pages
         {
             if (Visibility == Visibility.Visible)
             {
-                ToursAppEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
-                DGridHotels.ItemsSource = ToursAppEntities.GetContext().Hotels.ToList();
+                //IS24_USER10Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                DGridUsers.ItemsSource = IS24_USER10Entities.GetContext().Users.ToList();
             }
         }
     }

@@ -4,19 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fe57ffe1ee4c42ae9fce6e23332cccfc" Name="Diagram1" ZoomLevel="83">
-        <EntityTypeShape EntityType="ToursAppModel.Country" Width="1.5" PointX="0.75" PointY="4.5" />
-        <EntityTypeShape EntityType="ToursAppModel.Hotel" Width="1.5" PointX="3" PointY="4" />
-        <EntityTypeShape EntityType="ToursAppModel.HotelComment" Width="1.5" PointX="5.25" PointY="7.25" />
-        <EntityTypeShape EntityType="ToursAppModel.HotelImage" Width="1.5" PointX="5.25" PointY="1.25" />
-        <EntityTypeShape EntityType="ToursAppModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ToursAppModel.Tour" Width="1.5" PointX="5.25" PointY="3.75" />
-        <EntityTypeShape EntityType="ToursAppModel.Type" Width="1.5" PointX="7.5" PointY="4.25" />
-        <AssociationConnector Association="ToursAppModel.FK_Hotel_Country" />
-        <AssociationConnector Association="ToursAppModel.FK_HotelComment_Hotel" />
-        <AssociationConnector Association="ToursAppModel.FK_HotelImage_Hotel" />
-        <AssociationConnector Association="ToursAppModel.HotelOfTour" />
-        <AssociationConnector Association="ToursAppModel.TypeOfTour" />
+      <Diagram DiagramId="55fcfe5b534d4f829599030d34ca8998" Name="Diagram1">
+        <EntityTypeShape EntityType="IS24_USER10Model.Executor" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IS24_USER10Model.Manager" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IS24_USER10Model.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IS24_USER10Model.Task" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IS24_USER10Model.User" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="IS24_USER10Model.executors_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="IS24_USER10Model.FK_Executor_User" ManuallyRouted="false" />
+        <AssociationConnector Association="IS24_USER10Model.tasks_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="IS24_USER10Model.FK_Manager_User" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

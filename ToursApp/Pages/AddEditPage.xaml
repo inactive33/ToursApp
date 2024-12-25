@@ -11,55 +11,30 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Название"                   
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="20"/>
-        <TextBlock Text="Количество звёзд" 
-                   Grid.Row="1"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="20"/>
-        <TextBlock Text="Страна" 
-                   Grid.Row="2"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="20"/>
-        <TextBox x:Name="tBoxName"
-                 Text="{Binding Name}"
-                 Grid.Column="1"
-                 Margin="10"
-                 Height="30"
-                 MaxLength="100"/>
-        <TextBox x:Name="tBoxCountOfStars"
-                 Text="{Binding CountOfStars}"
-                 Grid.Row="1"
-                 Grid.Column="1"
-                 Margin="10"
-                 MaxLength="2"
-                 Height="30"/>
-        <ComboBox x:Name="ComboCountries" 
-                  Grid.Column="1" 
-                  Grid.Row="2"
-                  HorizontalAlignment="Left" 
-                  Height="30"
-                  Width="200"
-                  SelectedItem="{Binding Country}"
-                  Margin="10"
-                  DisplayMemberPath="Name"/>
+        <TextBlock Text="Город вылета" HorizontalAlignment="Center" Margin="4"/>
+        <TextBlock Text="Страна прибытия" Grid.Row="1" HorizontalAlignment="Center" Margin="4"/>
+        <TextBlock Text="Курорты" Grid.Row="2" HorizontalAlignment="Center" Margin="4"/>
+        <TextBlock Text="Отели" Grid.Row="3" HorizontalAlignment="Center" Margin="4"/>
+        <TextBlock Text="Дата отправления" Grid.Row="4" HorizontalAlignment="Center" Margin="4"/>
+        <TextBlock Text="Длительность тура" Grid.Row="5" HorizontalAlignment="Center" Margin="4"/>
+
         <Button Name="BtnSave"
                 Content="Save"
                 Click="BtnSave_Click"
                 Grid.Column="1"
-                Grid.Row="3"/>
+                Grid.Row="6"
+                />
     </Grid>
 </Page>

@@ -10,7 +10,7 @@ namespace ToursApp
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new HotelsPage());
+            MainFrame.Navigate(new Auth());
             Manager.MainFrame = MainFrame;
         }
 

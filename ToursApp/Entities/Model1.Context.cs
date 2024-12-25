@@ -13,30 +13,22 @@ namespace ToursApp.Entities
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ToursAppEntities : DbContext
+    public partial class IS24_USER10Entities : DbContext
     {
-        private static ToursAppEntities _context;
-        public ToursAppEntities()
-            : base("name=ToursAppEntities")
+        public IS24_USER10Entities()
+            : base("name=IS24_USER10Entities")
         {
         }
-        
-        public static ToursAppEntities GetContext() 
-        { 
-            if (_context == null) _context = new ToursAppEntities();
-            return _context;
-        }
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Country> Countries { get; set; }
-        public virtual DbSet<Hotel> Hotels { get; set; }
-        public virtual DbSet<HotelComment> HotelComments { get; set; }
-        public virtual DbSet<HotelImage> HotelImages { get; set; }
+        public virtual DbSet<Executor> Executors { get; set; }
+        public virtual DbSet<Manager> Managers { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Tour> Tours { get; set; }
-        public virtual DbSet<Type> Types { get; set; }
+        public virtual DbSet<Task> Tasks { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

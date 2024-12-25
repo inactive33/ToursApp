@@ -12,12 +12,21 @@ namespace ToursApp.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class HotelImage
+    public partial class Task
     {
-        public int Id { get; set; }
-        public int Hotel_id { get; set; }
-        public byte[] ImageSource { get; set; }
+        public int ID { get; set; }
+        public int ExecutorID { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public System.DateTime CreateDateTime { get; set; }
+        public System.DateTime Deadline { get; set; }
+        public double Difficulty { get; set; }
+        public int Time { get; set; }
+        public string Status { get; set; }
+        public string WorkType { get; set; }
+        public Nullable<System.DateTime> CompletedDateTime { get; set; }
+        public bool IsDeleted { get; set; }
     
-        public virtual Hotel Hotel { get; set; }
+        public virtual Executor Executor { get; set; }
     }
 }

@@ -13,20 +13,24 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
-        <Image Source="Resources\path.png" 
+        <Image Source="Resources\logo.png" 
                HorizontalAlignment="Left"/>
         <TextBlock Text="{Binding ElementName=MainFrame, Path=Content.Title}" 
                    FontSize="30" 
-                   HorizontalAlignment="Center" 
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
                    VerticalAlignment="Center"></TextBlock>
         <Grid Background="#bae3e8"
               Panel.ZIndex="-2"></Grid>
+        
         <Grid Grid.Row="2" 
-              Background="#445c93"></Grid>
+              Background="#66CDAA"></Grid>
+        
         <Frame Grid.Row="1" 
                Name="MainFrame" 
                NavigationUIVisibility="Hidden"
                ContentRendered="MainFrame_ContentRendered"></Frame>
+        
         <Button Content="Back"
                 Name="BtnBack" 
                 HorizontalAlignment="Right"
