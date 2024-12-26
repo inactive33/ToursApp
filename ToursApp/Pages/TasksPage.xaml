@@ -6,9 +6,68 @@
       xmlns:local="clr-namespace:ToursApp.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Page1">
+      Title="Tasks">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="1" Name="LViewTasks">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="20" Width="400">
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="310"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <!--Image-->
+                        <Image Width="400"
+                               Grid.Row="1" Stretch="UniformToFill"
+                               HorizontalAlignment="Center" 
+                               Margin="5" Source="Resources/default.png" />
+
+                        <!--Title-->
+                        <TextBlock VerticalAlignment="Center" 
+                                   TextAlignment="Center" 
+                                   Width="300"
+                                   TextWrapping="Wrap"
+                                   Text="{Binding Title}"
+                                   HorizontalAlignment="Center"
+                                   Margin="5 5"
+                                   FontSize="16"
+                                   Grid.Row="0"/>
+
+                        <!--Description-->
+                        <TextBlock VerticalAlignment="Stretch" 
+                                   TextAlignment="Center" 
+                                   Width="300"
+                                   Text="{Binding Description}"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Left"
+                                   Margin="5 5"
+                                   FontSize="14"
+                                   Grid.Row="1"/>
+                        
+                        <!--CreateDateTime-->
+                        <TextBlock VerticalAlignment="Stretch" 
+                                   TextAlignment="Center" 
+                                   Width="300"
+                                   Text="{Binding CreateDateTime}"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Left"
+                                   Margin="5 5"
+                                   FontSize="14"
+                                   Grid.Row="2"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
 </Page>

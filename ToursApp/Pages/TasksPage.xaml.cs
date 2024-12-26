@@ -25,6 +25,9 @@ namespace ToursApp.Pages
         public TasksPage()
         {
             InitializeComponent();
+            var currentTasks = IS24_USER10Entities.GetContext().Tasks.ToList();
+
+            LViewTasks.ItemsSource = currentTasks;
         }
     } 
 }
