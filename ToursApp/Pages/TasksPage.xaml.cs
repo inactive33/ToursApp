@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using ToursApp.Pages;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -13,22 +13,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToursApp.Entities;
 
 namespace ToursApp.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Auth.xaml
+    /// Логика взаимодействия для TasksPage.xaml
     /// </summary>
-    public partial class Auth : Page
+    public partial class TasksPage : Page
     {
-        public Auth()
+        public TasksPage()
         {
             InitializeComponent();
         }
-
-        private void SignIn_Click(object sender, RoutedEventArgs e)
-        {
-            Manager.MainFrame.Navigate(new UsersPage());
-        }
-    }
+    } 
 }

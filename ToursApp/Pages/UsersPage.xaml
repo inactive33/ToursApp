@@ -14,14 +14,14 @@
             <RowDefinition Height="73*"/>
         </Grid.RowDefinitions>
         <DataGrid x:Name="DGridUsers"
-                  AutoGenerateColumns="False" 
+                  AutoGenerateColumns="False"
                   IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" 
                                     Binding="{Binding ID}"/>
-                <DataGridTextColumn Header="Фамилия"
+                <DataGridTextColumn Header="Имя"
                                     Binding="{Binding FirstName}"/>
-                <DataGridTextColumn Header="Имя" 
+                <DataGridTextColumn Header="Фамилия" 
                                     Binding="{Binding MiddleName}"/>
                 <DataGridTextColumn Header="Отчество" 
                                     Binding="{Binding LastName}"/>
@@ -29,7 +29,7 @@
                                     Binding="{Binding Login}"/>
                 <DataGridTextColumn Header="Password" 
                                     Binding="{Binding Password}"/>
-                <DataGridTextColumn Header="Удален" 
+                <DataGridCheckBoxColumn Header="Удален" 
                                     Binding="{Binding IsDeleted}"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
@@ -42,13 +42,17 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Add" Name="BtnAdd" 
+        <Button Content="Добавить" Name="BtnAdd" 
                 Grid.Row="1" 
                 HorizontalAlignment="Left"
                 Click="BtnAdd_Click"/>
-        <Button Content="Delete" Name="BtnDelete"
+        <Button Content="Удалить" Name="BtnDelete"
                 Click="BtnDelete_Click"
-                Grid.Row="1" 
+                Grid.Row="1"
                 HorizontalAlignment="Right"/>
+        <Button Content="Импортировать" Name="BtnImport"
+                Click="BtnImport_Click"
+                Grid.Row="1"
+                HorizontalAlignment="Center"/>
     </Grid>
 </Page>

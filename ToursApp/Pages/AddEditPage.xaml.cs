@@ -27,10 +27,12 @@ namespace ToursApp.Pages
             StringBuilder errors = new StringBuilder();
 
             // StringBuilder checks errors:
-            //if (string.IsNullOrWhiteSpace(_currentUser.Name))                       errors.AppendLine("Не корректное заполнение поля: Название отеля");
-            //if (string.IsNullOrWhiteSpace(_currentUser.CountOfStars.ToString()))    errors.AppendLine("Не корректное заполнение поля: Количество звёзд");
-            //if (_currentUser.CountOfStars < 1 || _currentUser.CountOfStars > 5)    errors.AppendLine("Количество звёзд должно существовать в заданном интервале (1-5)");
-            //if (_currentUser.Country == null)                                       errors.AppendLine("Не корректный выбор страны");
+            if (string.IsNullOrWhiteSpace(_currentUser.FirstName))                       errors.AppendLine("Не корректное заполнение поля: Имя");
+            if (string.IsNullOrWhiteSpace(_currentUser.MiddleName))                      errors.AppendLine("Не корректное заполнение поля: Фамилия");
+            if (string.IsNullOrWhiteSpace(_currentUser.LastName))                        errors.AppendLine("Не корректное заполнение поля: Отчество");
+            if (string.IsNullOrWhiteSpace(_currentUser.Login))                           errors.AppendLine("Не корректное заполнение поля: Логин");
+         // if (string.IsNullOrWhiteSpace(_currentUser.Password))                       errors.AppendLine("Не корректное заполнение поля: Пароль");
+
 
             if (errors.Length > 0) { MessageBox.Show(errors.ToString()); return; }
 
@@ -40,7 +42,7 @@ namespace ToursApp.Pages
 
             try
             {
-               // IS24_USER10Entities.GetContext().SaveChanges();
+                IS24_USER10Entities.GetContext().SaveChanges();
                 MessageBox.Show("Сохранение успешно!");
             } 
             catch (Exception ex) { MessageBox.Show(ex.ToString());}

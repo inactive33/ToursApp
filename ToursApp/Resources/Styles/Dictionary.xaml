@@ -9,6 +9,7 @@
         <Setter Property="FontFamily" Value="Comic Sans MS"/>
         <Setter Property="Foreground" Value="#37474F"/>
     </Style>
+    
     <!-- TextBox style -->
     <Style TargetType="TextBox">
         <Setter Property="Foreground" Value="#37474F"/>

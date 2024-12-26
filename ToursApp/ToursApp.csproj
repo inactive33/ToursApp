@@ -112,7 +112,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Auth.xaml">
+    <Page Include="Pages\AuthPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TasksPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -130,8 +134,11 @@
     <Compile Include="Pages\AddEditPage.xaml.cs">
       <DependentUpon>AddEditPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Auth.xaml.cs">
-      <DependentUpon>Auth.xaml</DependentUpon>
+    <Compile Include="Pages\AuthPage.xaml.cs">
+      <DependentUpon>AuthPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TasksPage.xaml.cs">
+      <DependentUpon>TasksPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\UsersPage.xaml.cs">
       <DependentUpon>UsersPage.xaml</DependentUpon>
