@@ -12,7 +12,9 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-
+        <StackPanel Grid.Row="3" VerticalAlignment="Center" Width="200">
+            <Button Content="Export (Excel)" Name="ExportExcel" Click="ExportExcel_Click"/>
+        </StackPanel>
         <Image Source="Resources\logo.png" 
                HorizontalAlignment="Left"/>
         <TextBlock Text="{Binding ElementName=MainFrame, Path=Content.Title}" 
@@ -24,6 +26,7 @@
               Panel.ZIndex="-2"></Grid>
         
         <Grid Grid.Row="2" 
+              Panel.ZIndex="-2"
               Background="#66CDAA"></Grid>
         
         <Frame Grid.Row="1" 

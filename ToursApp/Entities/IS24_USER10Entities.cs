@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToursApp.Entities
+﻿namespace ToursApp.Entities
 {
-    public partial class IS24_USER10Entities 
+    public partial class IS24_USER10Entities
     {
         private static IS24_USER10Entities _context;
 
@@ -17,5 +11,9 @@ namespace ToursApp.Entities
             }
             return _context; 
         }
+    }
+    public partial class User 
+    {
+        public string FullName() => FirstName + MiddleName + LastName;
     }
 }

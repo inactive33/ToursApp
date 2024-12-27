@@ -11,7 +11,7 @@ namespace ToursApp.Pages
     /// </summary>
     public partial class AddEditPage : Page
     {
-        private User _currentUser = new User();
+        readonly private User _currentUser = new User();
         public AddEditPage(User selectedUsers)
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace ToursApp.Pages
 
 
             if (errors.Length > 0) { MessageBox.Show(errors.ToString()); return; }
-
+            
             if (_currentUser.ID == 0) {
                 IS24_USER10Entities.GetContext().Users.Add(_currentUser);
             }

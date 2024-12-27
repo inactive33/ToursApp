@@ -67,7 +67,7 @@ namespace ToursApp.Pages
                     MiddleName = data[2].Replace("\"", "").ToString(),
                     LastName = data[3].Replace("\"", "").ToString(),
                     Login = data[4].Replace("\"", "").ToString(),
-                    IsDeleted = (data[5] == "0") ? false : true
+                    IsDeleted = data[5] != "0"
                 };
 
                 IS24_USER10Entities.GetContext().Users.Add(tempUser);
