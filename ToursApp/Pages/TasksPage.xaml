@@ -13,38 +13,74 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <ListView Grid.Row="1" Name="LViewTasks">
+        <WrapPanel Orientation="Horizontal"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center">
+            <StackPanel Margin="10">
+                <TextBlock Text="Введите название для поиска:" 
+                           Width="175" 
+                           TextAlignment="Right"/>
+                <TextBox Name="TBoxSearch" 
+                          TextChanged="TBoxSearch_TextChanged"/>
+            </StackPanel>
+            <StackPanel Margin="10">
+                <TextBlock Text="Выберите тип:" 
+                           Width="175" 
+                           TextAlignment="Left"/>
+                <ComboBox Name="ComboType" 
+                          Width="225" 
+                          SelectionChanged="ComboType_SelectionChanged"
+                          DisplayMemberPath="Grade"/>
+            </StackPanel>
+            <CheckBox x:Name="CheckAtual"
+                      Margin="10"
+                      Checked="CheckAtual_Checked" 
+                      Unchecked="CheckAtual_Checked" 
+                      Content="Показывать только актуальные задачи"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Bottom"/>
+        </WrapPanel>
+        <ListView Grid.Row="1" Name="LViewTasks" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                  HorizontalAlignment="Center">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" 
+                               HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="20" Width="400">
-                        
+                    <Grid Margin="20" 
+                          Width="500">
+
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="200"/>
                             <RowDefinition Height="70"/>
-                            <RowDefinition Height="310"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="70"/>
                         </Grid.RowDefinitions>
-                        
-                        <!--Image-->
-                        <Image Width="400"
-                               Grid.Row="1" Stretch="UniformToFill"
-                               HorizontalAlignment="Center" 
-                               Margin="5" Source="Resources/default.png" />
 
                         <!--Title-->
                         <TextBlock VerticalAlignment="Center" 
                                    TextAlignment="Center" 
-                                   Width="300"
+                                   Width="150"
                                    TextWrapping="Wrap"
                                    Text="{Binding Title}"
                                    HorizontalAlignment="Center"
                                    Margin="5 5"
                                    FontSize="16"
                                    Grid.Row="0"/>
+                        
+                        <!--Image-->
+                        <Image Width="150"
+                               Height="150"
+                               Grid.Row="1" Stretch="UniformToFill"
+                               HorizontalAlignment="Center" 
+                               Margin="5" Source="/Resources/default.png"/>
 
                         <!--Description-->
-                        <TextBlock VerticalAlignment="Stretch" 
+                        <TextBlock VerticalAlignment="Top" 
                                    TextAlignment="Center" 
                                    Width="300"
                                    Text="{Binding Description}"
@@ -53,17 +89,82 @@
                                    Margin="5 5"
                                    FontSize="14"
                                    Grid.Row="1"/>
-                        
+
+                        <!--Status-->
+                        <!--WorkType-->
+                        <!--ExecutorID.Grade-->
+                        <StackPanel Grid.Row="2" VerticalAlignment="Center">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel HorizontalAlignment="Left" Grid.Column="0">
+                                    <Label Content="Должность:"/>
+                                    <TextBlock TextAlignment="Center" 
+                                           Text="{Binding Executor.Grade}"
+                                           FontSize="14"
+                                           Grid.Row="2"
+                                           FontWeight="Bold"/>
+                                </StackPanel>
+                                <StackPanel HorizontalAlignment="Center" Grid.Column="1">
+                                    <Label Content="Статус:"/>
+                                    <TextBlock TextAlignment="Center" 
+                                               Text="{Binding Status}"
+                                               FontSize="14"
+                                               FontWeight="Bold"/>
+                                </StackPanel>
+                                <StackPanel HorizontalAlignment="Right" Grid.Column="2">
+                                    <Label Content="Вид работы:"/>
+                                    <TextBlock TextAlignment="Center" 
+                                           Text="{Binding WorkType}"
+                                           FontSize="14"
+                                           FontWeight="Bold"
+                                           TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                            
                         <!--CreateDateTime-->
-                        <TextBlock VerticalAlignment="Stretch" 
-                                   TextAlignment="Center" 
-                                   Width="300"
-                                   Text="{Binding CreateDateTime}"
-                                   TextWrapping="Wrap"
-                                   HorizontalAlignment="Left"
-                                   Margin="5 5"
-                                   FontSize="14"
-                                   Grid.Row="2"/>
+                        <!--Difficulty-->
+                        <!--Deadline-->
+                        <StackPanel Grid.Row="3" VerticalAlignment="Center">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel HorizontalAlignment="Left" Grid.Column="0">
+                                    <Label Content="Создан:"/>
+                                    <TextBlock TextAlignment="Center" 
+                                           Text="{Binding CreateDateTime, StringFormat=MM/dd/yyyy}"
+                                           Margin="5 5"
+                                           FontSize="14"
+                                           Grid.Row="2"
+                                           FontWeight="Bold"/>
+                                </StackPanel>
+                                <StackPanel HorizontalAlignment="Center" Grid.Column="1">
+                                    <Label Content="Сложность"/>
+                                    <TextBlock TextAlignment="Center" 
+                                               Text="{Binding Difficulty}"
+                                               Margin="5 5"
+                                               FontSize="14"
+                                               FontWeight="Bold"/>
+                                </StackPanel>
+                                <StackPanel HorizontalAlignment="Right" Grid.Column="2">
+                                    <Label Content="Завершение:"/>
+                                    <TextBlock TextAlignment="Center" 
+                                           Text="{Binding Deadline, StringFormat=MM/dd/yyyy}"
+                                           Margin="5 5"
+                                           FontSize="14"
+                                           FontWeight="Bold"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

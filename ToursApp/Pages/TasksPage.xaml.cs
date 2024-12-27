@@ -25,9 +25,50 @@ namespace ToursApp.Pages
         public TasksPage()
         {
             InitializeComponent();
+
+            var allTypes = IS24_USER10Entities.GetContext().Executors.GroupBy(e => e.Grade).Select(g => g.FirstOrDefault()).ToList();
+
+            if (!allTypes.Any(e => e.Grade == "Все типы")) {
+                allTypes.Insert(0, new Executor
+                {
+                    Grade = "Все типы"
+                });
+            }
+
+
+            ComboType.ItemsSource = allTypes.Distinct();
+
+            CheckAtual.IsChecked = true;
+            ComboType.SelectedIndex = 0;
+
+            UpdateTasks();
+        }
+
+        public void UpdateTasks() {
             var currentTasks = IS24_USER10Entities.GetContext().Tasks.ToList();
 
-            LViewTasks.ItemsSource = currentTasks;
+            if (ComboType.SelectedIndex > 0 && ComboType.SelectedItem is Executor selectedExecutor) currentTasks = currentTasks.Where(p => p.ExecutorID == selectedExecutor.ID).ToList();
+
+            currentTasks = currentTasks.Where(p => p.Title.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
+
+            if (!CheckAtual.IsChecked.Value) currentTasks = currentTasks.Where(p => p.IsDeleted).ToList();
+
+            LViewTasks.ItemsSource = currentTasks;  
+        }
+
+        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateTasks();
+        }
+
+        private void ComboType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateTasks();
+        }
+
+        private void CheckAtual_Checked(object sender, RoutedEventArgs e)
+        {
+            UpdateTasks();
         }
     } 
 }
