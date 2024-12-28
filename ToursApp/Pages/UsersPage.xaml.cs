@@ -29,14 +29,14 @@ namespace ToursApp.Pages
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            var hotelsForRemoving = DGridUsers.SelectedItems.Cast<User>().ToList();
+            var usersForRemoving = DGridUsers.SelectedItems.Cast<User>().ToList();
 
-            if (MessageBox.Show($"Вы точно хотите удалить следующие {hotelsForRemoving.Count()} элементов?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (MessageBox.Show($"Вы точно хотите удалить следующие {usersForRemoving.Count()} элементов?", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             { 
                 try 
                 {
-                    IS24_USER10Entities.GetContext().Users.RemoveRange(hotelsForRemoving);
-                  //  IS24_USER10Entities.GetContext().SaveChanges();
+                    IS24_USER10Entities.GetContext().Users.RemoveRange(usersForRemoving);
+                    IS24_USER10Entities.GetContext().SaveChanges();
 
                 } catch (Exception ex) { MessageBox.Show(ex.ToString()); }
             }
@@ -46,7 +46,7 @@ namespace ToursApp.Pages
         {
             if (Visibility == Visibility.Visible)
             {
-                //IS24_USER10Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                IS24_USER10Entities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
                 DGridUsers.ItemsSource = IS24_USER10Entities.GetContext().Users.ToList();
             }
         }
@@ -77,7 +77,6 @@ namespace ToursApp.Pages
                 }
                 catch { MessageBox.Show("Данные для пользователя уже загружены"); return; }
             }
-
         }
 
         private void BtnImport_Click(object sender, RoutedEventArgs e)

@@ -15,7 +15,7 @@ namespace ToursApp.Pages
 
         private void SignIn_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new TasksPage());
+            Manager.MainFrame.Navigate(new DiagrammPage());
         }
     }
 }
